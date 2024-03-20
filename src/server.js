@@ -1,7 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import { filterImageFromURL, deleteLocalFiles } from '../util/util.js';
-
+import axios from 'axios';
 
 
 // Init the Express application
@@ -47,9 +47,18 @@ app.get("/filteredimage", async (req, res) => {
       res.send("Image url is not valid. Please check it");
       return;
     }
-    filterImageFromURL(image_url).then((imageBlobPath) => {
-      res.status(200).send(`OK: ${imageBlobPath}`)
+    axios({
+      method: 'get',
+      url: image_url,
+      responseType: 'arraybuffer'
     })
+      .then(function ({ data: imageBuffer }) {
+        filterImageFromURL(imageBuffer).then((imageBlobPath) => {
+          res.status(200).send(`OK: ${imageBlobPath}`)
+        })
+        // return jimp.read(imageBuffer)
+      })
+
     // const imageBlobPath = await filterImageFromURL(image_url);
     // console.log(image_url)
     // res.send(`OK: ${imageBlob}`)

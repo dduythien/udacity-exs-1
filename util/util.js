@@ -1,6 +1,6 @@
 import fs from "fs";
 import Jimp from "jimp";
-
+import axios from 'axios';
 
 // filterImageFromURL
 // helper function to download, filter, and save the filtered image locally
@@ -22,6 +22,7 @@ export async function filterImageFromURL(inputURL) {
       //   .write(outpath, (img) => {
       //     resolve(outpath);
       //   });
+
       const outpath =
         "assets/filtered-" + Math.floor(Math.random() * 2000) + ".jpg";
       Jimp
