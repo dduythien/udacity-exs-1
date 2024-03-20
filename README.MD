@@ -1,2 +1,1 @@
-I face issue using jimp.read function. I got Could not find MIME for Buffer <null> error.
-Show i modify util function.
+URL: http://filter-image-dev.us-east-1.elasticbeanstalk.com/filteredimage?image_url=https://upload.wikimedia.org/wikipedia/commons/b/bd/Golden_tabby_and_white_kitten_n01.jpg
