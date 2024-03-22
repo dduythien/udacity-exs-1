@@ -24,7 +24,7 @@ export async function filterImageFromURL(inputURL) {
       //   });
 
       const outpath =
-        "assets/filtered-" + Math.floor(Math.random() * 2000) + ".jpg";
+        "/tmp/filtered." + Math.floor(Math.random() * 2000) + ".jpg";
       Jimp
         .read(inputURL)
         .then(async (image) => {

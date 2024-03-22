@@ -29,17 +29,6 @@ app.use(bodyParser.json());
 
 /**************************************************************************** */
 
-//! END @TODO1
-
-
-// Root Endpoint
-// Displays a simple message to the user
-app.get("/", async (req, res) => {
-  res.send("Udacity exs-2")
-});
-
-
-//https://upload.wikimedia.org/wikipedia/commons/b/bd/Golden_tabby_and_white_kitten_n01.jpg
 app.get("/filteredimage", async (req, res) => {
   try {
     const { image_url } = req.query;
@@ -54,7 +43,10 @@ app.get("/filteredimage", async (req, res) => {
     })
       .then(function ({ data: imageBuffer }) {
         filterImageFromURL(imageBuffer).then((imageBlobPath) => {
-          res.status(200).send(`OK: ${imageBlobPath}`)
+          res.sendFile(imageBlobPath, () => {
+            deleteLocalFiles([imageBlobPath])
+          });
+
         })
         // return jimp.read(imageBuffer)
       })
@@ -67,6 +59,15 @@ app.get("/filteredimage", async (req, res) => {
   }
 
 });
+//! END @TODO1
+
+
+// Root Endpoint
+// Displays a simple message to the user
+app.get("/", async (req, res) => {
+  res.send("Udacity exs-2")
+});
+
 
 
 // Start the Server
